@@ -121,7 +121,7 @@ function App() {
             </p>
           </div>
           <div className="item-option">
-            <p>Đổi logo (Ảnh PNG trong suốt, size lớn hơn 1000px)</p>
+            <p>Đổi logo (Ảnh PNG trong suốt, size lớn hơn 1000px x 1000px)</p>
           </div>
           <div className="item-option">
             <input
