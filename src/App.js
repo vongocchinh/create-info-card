@@ -21,13 +21,14 @@ function App() {
   const [picture2, setPicture2] = useState(null);
   const [color, setColor] = useState("#FFFFFF");
   const [size, setSize] = useState(90);
-  const [sizeText, setSizeText] = useState(28);
+  const [sizeText, setSizeText] = useState(24);
   const [fontText, setFontText] = useState("Arial, Helvetica, sans-serif");
   const [bgColor, setBgColor] = useState("#000");
   const [bgColorQr, setBgColorQr] = useState("#FFF");
   const [bgqr, setqr] = useState("#FFF");
   const [showImg, setShowImg] = useState(true);
   const [widthImg, setWidthImg] = useState(true);
+  const [two, setTwo] = useState(true);
 
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
@@ -120,8 +121,8 @@ function App() {
             className="bg"
             ref={componentRef}
           >
-            <div className="img" >
-              <div className="icon">
+            <div className={two?"img":"img-2"}>
+              <div className={two?"icon":"icon-2"}>
                 <FaFacebook style={{ color: color }} className="ion-icon" />
                 <FaInstagram style={{ color: color }} className="ion-icon" />
                 <SiTiktok style={{ color: color }} className="ion-icon" />
@@ -137,13 +138,13 @@ function App() {
                   fontFamily: fontText,
                   color: color,
                 }}
-                className="label"
+                className={two?"label":"label-2"}
               >
                 {name}
               </p>
               <div
                 style={{ backgroundColor: bgColorQr }}
-                className="container-qr"
+                className={two?"container-qr":"container-qr-2"}
               >
                 <QRCode
                   bgColor={bgqr}
@@ -217,7 +218,7 @@ function App() {
               </p>
             </div>
             <div className="item-option">
-              <p>Đổi logo (Ảnh PNG trong suốt, size lớn hơn 1000px x 1000px)</p>
+              <p>Đổi ảnh (Ảnh PNG trong suốt, size lớn hơn 1000px x 1000px)</p>
             </div>
             <div className="item-option">
               <input
@@ -257,6 +258,16 @@ function App() {
                 </div>
               </>
             )}
+            <div className="item-option">
+              <p>Desgin 2</p>
+              <Switch
+                onClick={() => {
+                  setTwo(!two);
+                }}
+                name="checkedB"
+                color="primary"
+              />
+            </div>
           </div>
           <div className="options">
             <div className="item-option">
