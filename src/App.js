@@ -6,7 +6,7 @@ import './styles.css';
 import QRCode from "react-qr-code";
 import { FaFacebook ,FaInstagram,FaYoutube} from "react-icons/fa";
 import { SiTiktok } from "react-icons/si";
-
+import {FcNfcSign} from 'react-icons/fc';
 
 // const ComponentToPrint = React.forwardRef((props, ref) => (
 //   <div ref={ref}>Hello World</div>
@@ -24,15 +24,28 @@ const [fontText, setFontText] = useState("Arial, Helvetica, sans-serif");
 
 
 // const readFile = file => {
-// return new Promise((resolve, reject) => {
-// const fr = new FileReader();
-// fr.onerror = reject;
-// fr.onload = function() {
-// resolve(fr.result);
+//   return new Promise((resolve, reject) => {
+//     const fr = new FileReader();
+//     fr.onerror = reject;
+//     fr.onload = function() {
+//     resolve(fr.result);
 // };
-// fr.readAsDataURL(file);
+//   fr.readAsDataURL(file);
 // });
 // };
+
+
+
+
+const onImageChange = (event) => {
+  if (event.target.files && event.target.files[0]) {
+   
+    setPicture(URL.createObjectURL(event.target.files[0]))
+  }
+ }
+
+
+
 const componentRef = useRef();
 
 return (
@@ -41,6 +54,7 @@ return (
         <div className="bg" ref={componentRef} >
             <div className="img">
               <div className="icon">
+                <FcNfcSign className="ion-icon" />
                 <FaFacebook className="ion-icon" />
                 <FaInstagram className="ion-icon" />
                 <SiTiktok className="ion-icon" />
@@ -62,7 +76,7 @@ return (
                 <p><strong>1.QR Code</strong></p>
             </div>
             <div className="item-option">
-                <p>Nhập link http</p><input onChange={e=>{setQr(e.target.value)}} value={qr} className="input-file"
+                <p>Nhập link linktr.ee khi đã đăng ký thông tin </p><input onChange={e=>{setQr(e.target.value)}} value={qr} className="input-file"
                 type="text" />
                 <span onClick={()=>{setSize(size-5)}}>-Thu nhỏ</span>
                 <span onClick={()=>{setSize(size+5)}}>+Phóng to</span>
@@ -74,7 +88,7 @@ return (
         </div>
         <div className="item-option">
             <p>Đổi logo (Ảnh PNG trong suốt, size lớn hơn 1000px)</p><input accept="image/*"
-                onChange={e=>{setPicture(e.target.files[0]);}} className="input-file" type="file" />
+                onChange={onImageChange} className="input-file" type="file" />
         </div>
     </div>
     <div className="options">
@@ -97,6 +111,9 @@ return (
         </div>
     </div>
     <div className="options">
+    <div className="item-option">
+            <p><strong>4.In Thông tin thẻ</strong></p>
+        </div>
       <div className="item-option">
       <button onClick={() => exportComponentAsJPEG(componentRef)}>
         Export As JPEG
@@ -109,6 +126,11 @@ return (
       </button>
       </div>
     </div>
+    <div className="options">
+      <div className="item-option">
+        <p><strong>5.Truy cập <a rel="noreferrer" href="https://linktr.ee/register" target="_blank">https://linktr.ee/register</a> để đăng ký thông tin</strong></p>
+      </div>
+      </div>
 </div>
 
 

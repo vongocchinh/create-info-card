@@ -2,6 +2,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .App {
@@ -22,7 +23,7 @@
 }
 .icon{
     margin: 30px 30px;
-    width: 150px;
+    width: 170px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -61,11 +62,12 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
 .options p {
     font-size: 14px;
+    letter-spacing: 0.6px;
 }
 
 .item-option {
@@ -135,4 +137,12 @@ select{
     margin-right: 10px;
     border: none;
     cursor: pointer;
+    font-size: 14px;
+}
+
+.options:last-child{
+    margin-top: 0px;
+}
+.options:last-child a{
+    color: #065DF5;
 }
