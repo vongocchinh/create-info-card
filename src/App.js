@@ -34,7 +34,7 @@ function App() {
   const [picture2, setPicture2] = useState(null);
   const [color, setColor] = useState("#FFFFFF");
   const [size, setSize] = useState(90);
-  const [sizeText, setSizeText] = useState(24);
+  const [sizeText, setSizeText] = useState(20);
   const [fontText, setFontText] = useState("Arial, Helvetica, sans-serif");
   const [bgColor, setBgColor] = useState("#000");
   const [bgColorQr, setBgColorQr] = useState("#FFF");
