@@ -5,14 +5,27 @@ import {
   exportComponentAsPNG,
 } from "react-component-export-image";
 
-import Default from "./asset/sss.jpg";
+
+import Default1 from "./asset/1.webp";
+import Default2 from "./asset/2.jpg";
+import Default3 from "./asset/3.webp";
+import Default4 from "./asset/4.jpg";
+import Default5 from "./asset/5.jpg";
+import Default6 from "./asset/6.jpg";
+import Default7 from "./asset/7.webp";
+import Default8 from "./asset/8.webp";
+import Default9 from "./asset/9.jpg";
+import Default10 from "./asset/10.jpg";
+import Default11 from "./asset/11.webp";
+
+import Default from "./asset/5.jpg";
 import "./styles.css";
 import QRCode from "react-qr-code";
 import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
 import { SiTiktok } from "react-icons/si";
 import { IoLocationOutline } from "react-icons/io5";
 import Switch from "@material-ui/core/Switch";
-import { GrView } from "react-icons/gr";
+// import { GrView } from "react-icons/gr";
 
 function App() {
   const [name, setName] = useState("Võ Ngọc Chính");
@@ -29,6 +42,22 @@ function App() {
   const [showImg, setShowImg] = useState(true);
   const [widthImg, setWidthImg] = useState(true);
   const [two, setTwo] = useState(true);
+
+  const arr=[
+    Default1,
+    Default2,
+    Default3,
+    Default4,
+    Default5,
+    Default6,
+    Default7,
+    Default8,
+    Default9,
+    Default10,
+    Default11,
+    Default
+  ]
+
 
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
@@ -106,12 +135,21 @@ function App() {
       return "block";
     }
   };
+
+  const showItemImg=(arr)=>{
+    var html=null;
+    html=arr.map((item,key)=>{
+      return <img onClick={()=>{setPicture(item)}} className="item-img"  alt=" " src={item} />
+    })
+
+    return html;
+  }
   return (
     <>
       <div className="header">
-        <div>Ngọc Chính</div>
+        <div>By Ngọc Chính .Liên hệ : ngocchinh1410@gmail.com</div>
         <div>
-          <GrView className="ion-icon-view" /> <span className="span">0</span>
+          {/* <span className="span">0</span> */}
         </div>
       </div>
       <div className="App">
@@ -121,8 +159,8 @@ function App() {
             className="bg"
             ref={componentRef}
           >
-            <div className={two?"img":"img-2"}>
-              <div className={two?"icon":"icon-2"}>
+            <div className={two ? "img" : "img-2"}>
+              <div className={two ? "icon" : "icon-2"}>
                 <FaFacebook style={{ color: color }} className="ion-icon" />
                 <FaInstagram style={{ color: color }} className="ion-icon" />
                 <SiTiktok style={{ color: color }} className="ion-icon" />
@@ -138,13 +176,13 @@ function App() {
                   fontFamily: fontText,
                   color: color,
                 }}
-                className={two?"label":"label-2"}
+                className={two ? "label" : "label-2"}
               >
                 {name}
               </p>
               <div
                 style={{ backgroundColor: bgColorQr }}
-                className={two?"container-qr":"container-qr-2"}
+                className={two ? "container-qr" : "container-qr-2"}
               >
                 <QRCode
                   bgColor={bgqr}
@@ -192,22 +230,22 @@ function App() {
               />
             </div>
             <div className="item-option">
-              <span
+              <button
                 className="span"
                 onClick={() => {
                   setSize(size - 5);
                 }}
               >
                 -Thu nhỏ
-              </span>
-              <span
+              </button>
+              <button
                 className="span"
                 onClick={() => {
                   setSize(size + 5);
                 }}
               >
                 +Phóng to
-              </span>
+              </button>
             </div>
           </div>
 
@@ -259,7 +297,18 @@ function App() {
               </>
             )}
             <div className="item-option">
-              <p>Desgin 2</p>
+              <div className="layout-item-img">
+                      {showItemImg(arr)}
+              </div>
+            </div>
+          </div>
+          <div className="options">
+            <div className="item-option">
+              <p>
+                <strong>2.Desgin thẻ</strong>
+              </p>
+            </div>
+            <div className="item-option">
               <Switch
                 onClick={() => {
                   setTwo(!two);
@@ -272,7 +321,7 @@ function App() {
           <div className="options">
             <div className="item-option">
               <p>
-                <strong>3.Thông tin thẻ</strong>
+                <strong>4.Thông tin thẻ</strong>
               </p>
             </div>
             <div className="item-option">
@@ -317,39 +366,21 @@ function App() {
               </select>
             </div>
             <div className="item-option">
-              <span
+              <button
                 className="span"
                 onClick={() => {
                   setSizeText(sizeText - 2);
                 }}
               >
                 -Thu nhỏ
-              </span>
-              <span
+              </button>
+              <button
                 className="span"
                 onClick={() => {
                   setSizeText(sizeText + 2);
                 }}
               >
                 +Phóng to
-              </span>
-            </div>
-          </div>
-          <div className="options">
-            <div className="item-option">
-              <p>
-                <strong>4.In Thông tin thẻ</strong>
-              </p>
-            </div>
-            <div className="item-option">
-              <button onClick={() => exportComponentAsJPEG(componentRef)}>
-                Export As JPEG
-              </button>
-              <button onClick={() => exportComponentAsPDF(componentRef)}>
-                Export As PDF
-              </button>
-              <button onClick={() => exportComponentAsPNG(componentRef)}>
-                Export As PNG
               </button>
             </div>
           </div>
@@ -366,7 +397,7 @@ function App() {
                 <option value="2">Màu Bạc</option>
                 <option value="3">Màu Hường</option>
                 <option value="4">Màu Vàng</option>
-                <option value="5">Màu Đen 2</option>
+                <option value="5">Màu Đen color vàng</option>
               </select>
 
               <button
@@ -389,12 +420,29 @@ function App() {
               </select>
             </div>
           </div>
-
+          <div className="options">
+            <div className="item-option">
+              <p>
+                <strong>6.In Thông tin thẻ</strong>
+              </p>
+            </div>
+            <div className="item-option">
+              <button onClick={() => exportComponentAsJPEG(componentRef)}>
+                Export As JPEG
+              </button>
+              <button onClick={() => exportComponentAsPDF(componentRef)}>
+                Export As PDF
+              </button>
+              <button onClick={() => exportComponentAsPNG(componentRef)}>
+                Export As PNG
+              </button>
+            </div>
+          </div>
           <div className="options">
             <div className="item-option">
               <p>
                 <strong>
-                  5.Truy cập{" "}
+                  7.Truy cập{" "}
                   <a
                     rel="noreferrer"
                     href="https://linktr.ee/register"
