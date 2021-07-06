@@ -5,7 +5,7 @@ import {
   exportComponentAsPNG,
 } from "react-component-export-image";
 
-import Default from "./asset/dd.jpg";
+import Default from "./asset/sss.jpg";
 import "./styles.css";
 import QRCode from "react-qr-code";
 import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
@@ -18,6 +18,7 @@ function App() {
   const [name, setName] = useState("Võ Ngọc Chính");
   const [qr, setQr] = useState("https://linktr.ee/vongocchinh?");
   const [picture, setPicture] = useState(null);
+  const [color, setColor] = useState("#FFFFFF");
   const [size, setSize] = useState(80);
   const [sizeText, setSizeText] = useState(28);
   const [fontText, setFontText] = useState("Arial, Helvetica, sans-serif");
@@ -63,7 +64,7 @@ function App() {
               <FaYoutube className="ion-icon" />
             </div>
             <p
-              style={{ fontSize: sizeText + "px", fontFamily: fontText }}
+              style={{ fontSize: sizeText + "px", fontFamily: fontText ,color:color}}
               className="label"
             >
               {name}
@@ -162,6 +163,18 @@ function App() {
               <option value="cursive">Cursive</option>
               <option value="'Roboto', sans-serif">Roboto</option>
               <option value="'Qahiri', sans-serif">Qahiri</option>
+            </select>
+            <select
+              onChange={(e) => {
+                setColor(e.target.value);
+              }}
+              value={color}
+            >
+              <option value="#FFFFFF">White</option>
+              <option value="#000000">Black</option>
+              <option value="#065DF5">Blue</option>
+              <option value="#DF3737">Red</option>
+              <option value="#26BE96">Blue 1</option>
             </select>
           </div>
           <div className="item-option">
