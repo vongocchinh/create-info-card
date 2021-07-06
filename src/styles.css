@@ -148,6 +148,7 @@
     border-radius: 10px;
     border: 1px solid #939393;
     display: block;
+    width: 220px;
 }
 
 select {
