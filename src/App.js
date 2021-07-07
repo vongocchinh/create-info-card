@@ -5,7 +5,6 @@ import {
   exportComponentAsPNG,
 } from "react-component-export-image";
 
-
 import Default1 from "./asset/1.webp";
 import Default2 from "./asset/2.jpg";
 import Default3 from "./asset/3.webp";
@@ -26,7 +25,20 @@ import { SiTiktok } from "react-icons/si";
 import { IoLocationOutline } from "react-icons/io5";
 import Switch from "@material-ui/core/Switch";
 // import { GrView } from "react-icons/gr";
-
+const arr = [
+  Default1,
+  Default2,
+  Default3,
+  Default4,
+  Default5,
+  Default6,
+  Default7,
+  Default8,
+  Default9,
+  Default10,
+  Default11,
+  Default,
+];
 function App() {
   const [name, setName] = useState("Võ Ngọc Chính");
   const [qr, setQr] = useState("https://linktr.ee/vongocchinh?");
@@ -36,35 +48,24 @@ function App() {
   const [size, setSize] = useState(90);
   const [sizeText, setSizeText] = useState(20);
   const [fontText, setFontText] = useState("Arial, Helvetica, sans-serif");
-  const [bgColor, setBgColor] = useState("#000");
-  const [bgColorQr, setBgColorQr] = useState("#FFF");
-  const [bgqr, setqr] = useState("#FFF");
+  const [bgColor, setBgColor] = useState("#000000");
+  const [bgColorQr, setBgColorQr] = useState("#FFFFFF");
+  const [bgqr, setqr] = useState("#FFFFFF");
   const [showImg, setShowImg] = useState(true);
   const [widthImg, setWidthImg] = useState(true);
-  const [two, setTwo] = useState(true);
+  const [DesignTwo, setDesignTwo] = useState(true);
+  const [arrImg, setArrImg] = useState(arr);
 
-  const arr=[
-    Default1,
-    Default2,
-    Default3,
-    Default4,
-    Default5,
-    Default6,
-    Default7,
-    Default8,
-    Default9,
-    Default10,
-    Default11,
-    Default
-  ]
-
+ 
 
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       setPicture(URL.createObjectURL(event.target.files[0]));
+      arr.push(URL.createObjectURL(event.target.files[0]));
+      setArrImg(arr);
     }
   };
-
+  
   const onImageChange2 = (event) => {
     if (event.target.files && event.target.files[0]) {
       setPicture2(URL.createObjectURL(event.target.files[0]));
@@ -135,22 +136,29 @@ function App() {
       return "block";
     }
   };
-
-  const showItemImg=(arr)=>{
-    var html=null;
-    html=arr.map((item,key)=>{
-      return <img onClick={()=>{setPicture(item)}} className="item-img"  alt=" " src={item} />
-    })
+  const showItemImg = (arr) => {
+    var html = null;
+    html = arr.map((item, key) => {
+      return (
+        <img
+          key={key}
+          onClick={() => {
+            setPicture(item);
+          }}
+          className="item-img"
+          alt=" "
+          src={item}
+        />
+      );
+    });
 
     return html;
-  }
+  };
   return (
     <>
       <div className="header">
         <div>By Ngọc Chính .Liên hệ : ngocchinh1410@gmail.com</div>
-        <div>
-          {/* <span className="span">0</span> */}
-        </div>
+        <div>{/* <span className="span">0</span> */}</div>
       </div>
       <div className="App">
         <div className="img-side">
@@ -159,8 +167,8 @@ function App() {
             className="bg"
             ref={componentRef}
           >
-            <div className={two ? "img" : "img-2"}>
-              <div className={two ? "icon" : "icon-2"}>
+            <div className={DesignTwo ? "img" : "img-2"}>
+              <div className={DesignTwo ? "icon" : "icon-2"}>
                 <FaFacebook style={{ color: color }} className="ion-icon" />
                 <FaInstagram style={{ color: color }} className="ion-icon" />
                 <SiTiktok style={{ color: color }} className="ion-icon" />
@@ -176,13 +184,13 @@ function App() {
                   fontFamily: fontText,
                   color: color,
                 }}
-                className={two ? "label" : "label-2"}
+                className={DesignTwo ? "label" : "label-2"}
               >
                 {name}
               </p>
               <div
                 style={{ backgroundColor: bgColorQr }}
-                className={two ? "container-qr" : "container-qr-2"}
+                className={DesignTwo ? "container-qr" : "container-qr-2"}
               >
                 <QRCode
                   bgColor={bgqr}
@@ -228,6 +236,20 @@ function App() {
                 className="input-file"
                 type="text"
               />
+              &nbsp;
+              <p>Màu chữ , icon </p>
+              <select
+                value={bgColorQr}
+                className="select-1"
+                onChange={(e) => {
+                  setBgColorQr(e.target.value);
+                  setqr(e.target.value);
+                }}
+              >
+                <option value="#000000">Màu Đen</option>
+                <option value="#FFFFFF">Màu Trắng</option>
+                <option value="#AE7C2B">Màu Vàng</option>
+              </select>
             </div>
             <div className="item-option">
               <button
@@ -297,9 +319,7 @@ function App() {
               </>
             )}
             <div className="item-option">
-              <div className="layout-item-img">
-                      {showItemImg(arr)}
-              </div>
+              <div className="layout-item-img">{showItemImg(arrImg)}</div>
             </div>
           </div>
           <div className="options">
@@ -311,7 +331,7 @@ function App() {
             <div className="item-option">
               <Switch
                 onClick={() => {
-                  setTwo(!two);
+                  setDesignTwo(!DesignTwo);
                 }}
                 name="checkedB"
                 color="primary"
@@ -363,6 +383,7 @@ function App() {
                 <option value="#065DF5">Blue</option>
                 <option value="#DF3737">Red</option>
                 <option value="#26BE96">Blue 1</option>
+                <option value="#AE7C2B">Màu Vàng</option>
               </select>
             </div>
             <div className="item-option">
@@ -394,7 +415,7 @@ function App() {
             <div className="item-option">
               <select className="select" onChange={onChangeBg}>
                 <option value="1">Màu Đen</option>
-                <option value="2">Màu Bạc</option>
+                {/* <option value="2">Màu Bạc</option> */}
                 <option value="3">Màu Hường</option>
                 <option value="4">Màu Vàng</option>
                 <option value="5">Màu Đen color vàng</option>
@@ -413,10 +434,13 @@ function App() {
                 className="select-1"
                 onChange={(e) => {
                   setColor(e.target.value);
+                  setBgColorQr(e.target.value);
+                  setqr(e.target.value);
                 }}
               >
                 <option value="#000000">Màu Đen</option>
                 <option value="#FFFFFF">Màu Trắng</option>
+                <option value="#AE7C2B">Màu Vàng</option>
               </select>
             </div>
           </div>
