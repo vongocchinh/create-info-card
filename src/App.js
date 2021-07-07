@@ -56,8 +56,6 @@ function App() {
   const [DesignTwo, setDesignTwo] = useState(true);
   const [arrImg, setArrImg] = useState(arr);
 
- 
-
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
       setPicture(URL.createObjectURL(event.target.files[0]));
@@ -65,7 +63,7 @@ function App() {
       setArrImg(arr);
     }
   };
-  
+
   const onImageChange2 = (event) => {
     if (event.target.files && event.target.files[0]) {
       setPicture2(URL.createObjectURL(event.target.files[0]));
@@ -151,9 +149,23 @@ function App() {
         />
       );
     });
-
     return html;
   };
+
+  const activeClass = () => {
+    const ActiveImg = document.querySelectorAll(".item-img");
+    ActiveImg.forEach((res) =>
+      res.addEventListener("click", () => {
+        var j = 0;
+        while (j < ActiveImg.length) {
+          ActiveImg[j].className = "item-img";
+          j++;
+        }
+        res.className = "item-img active";
+      })
+    );
+  };
+  activeClass();
   return (
     <>
       <div className="header">
@@ -206,12 +218,12 @@ function App() {
                     width: showWidthImg(widthImg),
                   }}
                   alt=""
-                  src={picture ? picture : Default}
+                  src={picture ? picture : arrImg[0]}
                 />
                 <img
                   style={{ display: showDisImg(widthImg), width: "50%" }}
                   alt=""
-                  src={picture2 ? picture2 : Default}
+                  src={picture2 ? picture2 : arrImg[1]}
                 />
               </div>
             </div>
