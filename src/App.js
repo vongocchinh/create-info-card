@@ -1,10 +1,10 @@
 import React, { useState, useRef } from "react";
 import {
   exportComponentAsJPEG,
-  exportComponentAsPDF,
+  // exportComponentAsPDF,
   exportComponentAsPNG,
 } from "react-component-export-image";
-
+// import { jsPDF } from "jspdf";
 import Default1 from "./asset/1.webp";
 import Default2 from "./asset/2.jpg";
 import Default3 from "./asset/3.webp";
@@ -16,7 +16,7 @@ import Default8 from "./asset/8.webp";
 import Default9 from "./asset/9.jpg";
 import Default10 from "./asset/10.jpg";
 import Default11 from "./asset/11.webp";
-
+// import domtoimage from 'dom-to-image';
 import Default from "./asset/5.jpg";
 import "./styles.css";
 import QRCode from "react-qr-code";
@@ -45,8 +45,8 @@ function App() {
   const [picture, setPicture] = useState(null);
   const [picture2, setPicture2] = useState(null);
   const [color, setColor] = useState("#FFFFFF");
-  const [size, setSize] = useState(110);
-  const [sizeText, setSizeText] = useState(24);
+  const [size, setSize] = useState(60);
+  const [sizeText, setSizeText] = useState(20);
   const [fontText, setFontText] = useState("Arial, Helvetica, sans-serif");
   const [bgColor, setBgColor] = useState("#000000");
   const [bgColorQr, setBgColorQr] = useState("#FFFFFF");
@@ -152,6 +152,31 @@ function App() {
     return html;
   };
 
+  // const exportPDF= async ()=>{
+  //     const dataUrl = await domtoimage.toPng(document.querySelector("#card"));
+
+  //     const img = new Image();
+  //     img.src = dataUrl;
+
+  //     const doc = new jsPDF();
+  //     const RATIO = 1.02;
+  //     const WIDTH = 85.5 * RATIO;
+  //     const HEIGHT = 54 * RATIO;
+  //     doc.addImage(img, "JPEG", 15, 15, WIDTH, HEIGHT);
+  //     doc.addImage(img, "JPEG", 15, 90, WIDTH, HEIGHT);
+
+  //     // doc.setFontSize(16);
+  //     // doc.setFont("courier", "bold");
+  //     // doc.text(`Chon "Fit to Paper" khi in nhe :3.`, 15, 160);
+
+  //     doc.setLineWidth(3);
+  //     doc.line(0, 0, 210, 0);
+  //     doc.line(0, 0, 0, 297);
+  //     doc.line(210, 0, 210, 297);
+  //     doc.line(0, 297, 210, 297);
+  //     doc.save("taothe.pdf");
+  // }
+  // exportPDF();
   const activeClass = () => {
     const ActiveImg = document.querySelectorAll(".item-img");
     ActiveImg.forEach((res) =>
@@ -174,12 +199,14 @@ function App() {
       </div>
       <div className="App">
         <div className="img-side">
+          <h3>Kích thước: 85.5 × 54mm.</h3>
           <div
             style={{ backgroundColor: bgColor }}
             className="bg"
             ref={componentRef}
+            id="card"
           >
-            <div className={DesignTwo ? "img" : "img-2"}>
+            <div className={DesignTwo ? "img" : "img"}>
               <div className={DesignTwo ? "icon" : "icon-2"}>
                 <FaFacebook style={{ color: color }} className="ion-icon" />
                 <FaInstagram style={{ color: color }} className="ion-icon" />
@@ -190,6 +217,7 @@ function App() {
                   className="ion-icon"
                 />
               </div>
+              <div className={DesignTwo ? "div-label" : "div-label-2"}>
               <p
                 style={{
                   fontSize: sizeText + "px",
@@ -200,6 +228,8 @@ function App() {
               >
                 {name}
               </p>
+              </div>
+              <div className={DesignTwo ? "div-qr" : "div-qr-2"}>
               <div
                 style={{ backgroundColor: bgColorQr }}
                 className={DesignTwo ? "container-qr" : "container-qr-2"}
@@ -211,6 +241,8 @@ function App() {
                   value={qr}
                 />
               </div>
+              </div>
+
               <div className="img-layout">
                 <img
                   style={{
@@ -463,15 +495,18 @@ function App() {
               </p>
             </div>
             <div className="item-option">
-              <button onClick={() => exportComponentAsJPEG(componentRef)}>
+              <button onClick={() => exportComponentAsJPEG(componentRef,{fileName:"design-images"})}>
                 Export As JPEG
               </button>
-              <button onClick={() => exportComponentAsPDF(componentRef)}>
+              {/* <button onClick={() => exportComponentAsPDF(componentRef)}>
                 Export As PDF
-              </button>
+              </button> */}
               <button onClick={() => exportComponentAsPNG(componentRef)}>
                 Export As PNG
               </button>
+              {/* <button onClick={exportPDF}>
+                PDF
+              </button> */}
             </div>
           </div>
           <div className="options">
